@@ -12,7 +12,9 @@ const methodOverride = require('method-override')
 
 //router
 const indexRouter = require('./routes/index')
-
+const userRouter = require('./routes/users')
+const registerRouter = require('./routes/registers')
+const loginRouter = require('./routes/login')
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -31,6 +33,9 @@ db.on('error', error => console.error(error))
 db.on('open', () => console.log('Connected to mongoose database'))
 
 app.use('/', indexRouter)
+app.use('/users', userRouter)
+app.use('/register', registerRouter)
+app.use('/login', loginRouter)
 
 
 app.listen(process.env.PORT || 3000)

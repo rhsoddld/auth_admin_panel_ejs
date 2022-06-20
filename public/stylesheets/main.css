@@ -1,0 +1,18 @@
+@import 'shared/variables.css';
+@import 'shared/header.css';
+
+:root {
+    font-size: 20px;
+    color: var(--color-text-light);
+}
+
+body {
+    background: linear-gradient(to right, var(--color-background-dark), var(--color-background-light));
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    margin-bottom: 3rem;
+}
+
