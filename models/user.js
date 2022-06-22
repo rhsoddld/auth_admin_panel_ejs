@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
     email: {
@@ -10,7 +11,7 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
     },
-    name: {
+    username: {
         type: String,
         required: true,
     },
@@ -24,3 +25,22 @@ const userSchema = new mongoose.Schema({
         default: () => Date.now(),
     }
 })
+
+userSchema.methods.hasSamePassword = function(inputPassword) {
+    const user = this
+    return bcrypt.compareSync(inputpassword, user.password)
+}
+
+userSchema.pre('save', function(next) {
+    const user = this
+    const saltRounds = 10
+
+    bcrypt.genSalt(saltRounds, function(err, salt) {
+        bcrypt.hash(user.password, salt, function(err, hash) {
+            user.password = hash
+            next()
+        })
+    })
+})
+
+module.exports = mongoose.model('User', userSchema)
