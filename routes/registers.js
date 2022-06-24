@@ -7,8 +7,6 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', (req, res) => {
-    // console.log(req.body.password)
-    // res.send('200')
     const { email, password, confirmpassword, username } = req.body
     if(!email) {
         return res.status(422).send({errors: [{title: 'email error', detail: 'please input email'}]})
