@@ -1,0 +1,21 @@
+<h2>User Edit Page</h2>
+<form action="/users/<%= results.id %>?_method=PUT" method="POST">
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" value="<%= results.email %>" required>
+    <div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required>
+        <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Retype your password"required>
+    </div>
+    <div>
+        <label for="username">Name</label>
+        <input type="text" name="username" value="<%= results.username %>"required>
+    </div> 
+    <div>
+        <a>Cancel</a>
+        <button type="submit">Update</button>
+    </div>
+
+</form>

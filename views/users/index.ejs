@@ -1,1 +1,14 @@
 <h2>User Page</h2>
+<ul>
+    <li>Account</li>
+    <li>UserName</li>
+    <li></li>
+</ul>
+<% results.forEach(result => { %>
+    <ul>    
+        <li><%= result.email %></li>
+        <li><%= result.username %></li>
+        <li><a href="/users/<%= result.id %>/edit">Edit</a></li>
+        <li><%- include('../partials/deleteForm', { url: `/users/${result.id}`}) %></li>
+    </ul>
+<% }) %>

@@ -16,3 +16,10 @@ body {
     margin-bottom: 3rem;
 }
 
+ui {
+    list-style-type: none;
+}
+
+li {
+    display: inline;
+}

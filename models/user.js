@@ -15,6 +15,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    token: {
+        type: String,
+    },
     createAt: {
         type: Date,
         immutable: true,
@@ -26,9 +29,9 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-userSchema.methods.hasSamePassword = function(inputPassword) {
+userSchema.methods.hasSamePassword = function(password) {
     const user = this
-    return bcrypt.compareSync(inputpassword, user.password)
+    return bcrypt.compareSync(password, user.password)
 }
 
 userSchema.pre('save', function(next) {
