@@ -1,9 +1,15 @@
 const express = require('express')
 const router = express.Router()
-const Auth = require('../middlewares/auth')
 const User = require('../models/user')
 
-router.get('/', Auth, async (req, res) => {
+const requireLogin = (req, res, next) => {
+    if (!req.session.user_id) {
+        return res.redirect('/login')
+    }
+    next();
+}
+
+router.get('/', requireLogin, async (req, res) => {
 // router.get('/', async (req, res) => {
     let query = User.find()
 
@@ -55,18 +61,6 @@ router.put('/:id', async (req, res) => {
     }
 })
 
-// async function renderEditPage(res, user, hasError = false) {
-//     renderFormPage(res, user, 'edit', hasError)
-// }
 
-// async function renderFormPage(res, user, form, hasError = false) {
-//     try{
-//         // const user = await User.find({})
-//         res.render(`users/${form}`, { results: user })
-
-//     } catch {
-//         res.redirect('/books')
-//     }
-// }
 
 module.exports = router

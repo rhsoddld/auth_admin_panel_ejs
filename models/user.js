@@ -15,9 +15,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    token: {
-        type: String,
-    },
     createAt: {
         type: Date,
         immutable: true,
@@ -29,21 +26,31 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-userSchema.methods.hasSamePassword = function(password) {
-    const user = this
-    return bcrypt.compareSync(password, user.password)
+// userSchema.methods.hasSamePassword = function(password) {
+//     const user = this
+//     return bcrypt.compareSync(password, user.password)
+// }
+
+userSchema.statics.authValid = async function (email, password) {
+    const foundUser = await this.findOne({ email })
+    const checkPass = await bcrypt.compare(password, foundUser.password)
+    return checkPass ? foundUser : false
 }
 
-userSchema.pre('save', function(next) {
-    const user = this
-    const saltRounds = 10
+userSchema.pre('save', async function(next) {
+    if (!this.isModified('password')) return next()
 
-    bcrypt.genSalt(saltRounds, function(err, salt) {
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            user.password = hash
-            next()
-        })
-    })
+    this.password = await bcrypt.hash(this.password, 12)
+    next()
+
+    // const user = this
+    // const saltRounds = 10
+    // bcrypt.genSalt(saltRounds, function (err, salt) {
+    //     bcrypt.hash(user.password, salt, function (err, hash) {
+    //         this.password = hash
+    //         next()
+    //     })
+    // })
 })
 
 module.exports = mongoose.model('User', userSchema)

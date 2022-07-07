@@ -33,10 +33,13 @@ router.post('/', (req, res) => {
             if(err) {
                 return res.status(422).send({errors: [{title: 'register error', detail: 'something went wrong'}]})
             }
-            return res.json({"registered": true})
+            req.session.user_id = user._id;
+            res.redirect('/')
         })
-
     })
 })
+
+
+
 
 module.exports = router
