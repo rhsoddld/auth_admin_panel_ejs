@@ -3,9 +3,9 @@ const router = express.Router()
 const User = require('../models/user')
 
 router.get('/', (req, res) => {
-    if (!req.session.user_id) {
-        return res.render('registers', { session: false })
-    }
+    // if (!req.session.user_id) {
+    //     return res.render('registers', { session: false })
+    // }
     return res.render('registers', { session: true })
 })
 

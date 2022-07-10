@@ -4,8 +4,8 @@
         <ul>
             <% if (!session) { %>
             <li><a href="/login">Login</a></li>
-            <% } else { %>
             <li><a href="/register">Register</a></li>
+            <% } else { %>
             <li><a href="/users">Users</a></li>
             <li>
                 <form action="/logout" method="POST">
