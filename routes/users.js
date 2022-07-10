@@ -15,18 +15,18 @@ router.get('/', requireLogin, async (req, res) => {
 
     try {
         const users = await query.exec()
-        res.render('users', { results: users})
+        return res.render('users', { results: users, session: true})
     } catch {
-        res.redirect('/')
+        return res.redirect('/')
     }
 })
 
 router.get('/:id/edit', async (req, res) => {
     try{
         const user = await User.findById(req.params.id)
-        res.render(`users/edit`, { results: user })
+        return res.render(`users/edit`, { results: user, session: true})
     } catch {
-        res.redirect('/')
+        return res.redirect('/')
     }
 })
 
@@ -35,9 +35,9 @@ router.delete('/:id', async (req, res) => {
     try {
         user = await User.findById(req.params.id)
         await user.remove()
-        res.redirect('/users')
+        return res.redirect('/users')
     } catch {
-        res.redirect('/')
+        return res.redirect('/')
     }
 })
 
@@ -55,9 +55,9 @@ router.put('/:id', async (req, res) => {
         user.password = req.body.password
 
         await user.save()
-        res.redirect('/users')
+        return res.redirect('/users')
     } catch {
-        res.redirect('/users')
+        return res.redirect('/users')
     }
 })
 

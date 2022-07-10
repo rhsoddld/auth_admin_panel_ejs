@@ -1,0 +1,65 @@
+.userpage {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60rem;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+}
+
+.userpage .userpage-table {
+    box-sizing: border-box;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    min-width: 300px;
+    min-height: 300px; 
+}
+
+.userpage .userpage-table ul {
+    list-style-type: none;
+}
+
+.userpage .userpage-table .userpage-table-column li {
+    padding: 0px;
+    display: inline-block;
+    width: 300px;
+    height: 30px;  
+}
+
+.userpage .userpage-table .userpage-table-row li {
+    padding: 0px;
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    border-bottom: 0.5px solid rgb(52, 35, 35);
+}
+
+.userpage .userpage-table .userpage-table-row li:last-child {
+    text-align: right;
+    border-bottom: 0px;
+}
+
+.userpage .userpage-table .userpage-table-row li form {
+    display: inline;
+}
+
+.userpage .userpage-table .userpage-table-row li a, .userpage .userpage-table .userpage-table-row li input {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #1a73e8;
+    padding: 0.4rem;
+    cursor: pointer;
+    border-radius: 0.312rem;
+    height: 43px;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+   
+.userpage  .userpage-table .userpage-table-row li a:hover, .userpage .userpage-table .userpage-table-row li input:hover {
+    background-color: #adc8eb;
+    box-shadow: 0 1px 1px 0 rgba(66,133,244,0.45), 0 1px 3px 1px rgba(66,133,244,0.3);
+}

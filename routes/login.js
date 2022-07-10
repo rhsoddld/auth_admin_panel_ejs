@@ -3,7 +3,10 @@ const router = express.Router()
 const User = require('../models/user')
 
 router.get('/', (req, res) => {
-    res.render('login')
+    if (!req.session.user_id) {
+        return res.render('login', { session: false })
+    }
+    return res.render('login', { session: true })
 })
 
 router.post('/', async (req, res) => {

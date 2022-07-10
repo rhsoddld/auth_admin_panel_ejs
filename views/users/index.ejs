@@ -1,14 +1,22 @@
-<h2>User Page</h2>
-<ul>
-    <li>Account</li>
-    <li>UserName</li>
-    <li></li>
-</ul>
-<% results.forEach(result => { %>
-    <ul>    
-        <li><%= result.email %></li>
-        <li><%= result.username %></li>
-        <li><a href="/users/<%= result.id %>/edit">Edit</a></li>
-        <li><%- include('../partials/deleteForm', { url: `/users/${result.id}`}) %></li>
-    </ul>
-<% }) %>
+<div class="userpage">
+    <h2>User Page</h2>
+
+    <div class="userpage-table">
+        <ul class="userpage-table-column">
+            <li>Account</li>
+            <li>Name</li>
+            <li></li>
+        </ul>
+        <% results.forEach(result => { %>
+        <ul class="userpage-table-row">    
+            <li><%= result.email %></li>
+            <li><%= result.username %></li>
+            <li>
+                <a href="/users/<%= result.id %>/edit">Edit</a>
+                <%- include('../partials/deleteForm', { url: `/users/${result.id}`}) %>
+            </li>
+        </ul>
+        <% }) %>
+    </div>
+
+</div>

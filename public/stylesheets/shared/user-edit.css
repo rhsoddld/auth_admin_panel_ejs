@@ -1,0 +1,72 @@
+.userpage-edit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25rem;
+    padding: 2.5rem;
+    box-sizing: border-box;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+}
+
+.userpage-edit .inputBox {
+    position: relative;
+}
+ 
+.userpage-edit .inputBox input {
+    width: 93%;
+    padding: 1rem 10px;
+    font-size: 0.6rem;
+    letter-spacing: 0.062rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 4px;
+}
+ 
+.userpage-edit .inputBox label {
+    top: 0;
+    left: 10px;
+    padding: 0.625rem 0;
+    font-size: 1rem;
+    color: var(--color-text-light);
+    pointer-events: none;
+    transition: 0.5s;
+}
+ 
+.userpage-edit .inputBox input:focus ~ label,
+.userpage-edit .inputBox input:valid ~ label,
+.userpage-edit .inputBox input:not([value=""]) ~ label {
+    top: -1.125rem;
+    left: 10px;
+    color: #1a73e8;
+    font-size: 0.75rem;
+    background-color: #fff;
+    height: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+ 
+.userpage-edit .inputBox input:focus {
+    outline: none;
+    border: 2px solid #1a73e8;
+}
+ 
+.userpage-edit input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #1a73e8;
+    padding: 0.625rem 1.25rem;
+    cursor: pointer;
+    border-radius: 0.312rem;
+    font-size: 1rem;
+    margin-left: 0.5rem;
+  }
+   
+.userpage-edit input[type="submit"]:hover {
+    background-color: #adc8eb;
+    box-shadow: 0 1px 1px 0 rgba(66,133,244,0.45), 0 1px 3px 1px rgba(66,133,244,0.3);
+}
+  
