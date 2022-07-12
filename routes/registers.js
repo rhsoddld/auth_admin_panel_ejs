@@ -1,15 +1,16 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
+const authCheck = require('../middlewares/auth')
 
-router.get('/', (req, res) => {
-    // if (!req.session.user_id) {
-    //     return res.render('registers', { session: false })
-    // }
+router.get('/', authCheck, (req, res) => {
+    if (!req.session.user_id) {
+        return res.render('registers', { session: false })
+    }
     return res.render('registers', { session: true })
 })
 
-router.post('/', (req, res) => {
+router.post('/', authCheck, (req, res) => {
     const { email, password, confirmpassword, username } = req.body
     if(!email) {
         return res.status(422).send({errors: [{title: 'email error', detail: 'please input email'}]})
@@ -37,12 +38,9 @@ router.post('/', (req, res) => {
                 return res.status(422).send({errors: [{title: 'register error', detail: 'something went wrong'}]})
             }
             req.session.user_id = user._id;
-            res.redirect('/')
+            return res.redirect('/')
         })
     })
 })
-
-
-
 
 module.exports = router

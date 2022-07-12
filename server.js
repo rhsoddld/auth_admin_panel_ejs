@@ -13,11 +13,6 @@ const session = require('express-session')
 
 //router
 const indexRouter = require('./routes/index')
-const userRouter = require('./routes/users')
-const registerRouter = require('./routes/registers')
-const loginRouter = require('./routes/login')
-const logoutRouter = require('./routes/logout')
-
 
 app.set('view engine', 'ejs')
 app.set('views', __dirname + '/views')
@@ -30,12 +25,10 @@ app.use(session({ secret: process.env.SESSION_SECRET }))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+// const authCheck = require('./middlewares/auth') 
+// app.use("*", authCheck)
 
 app.use('/', indexRouter)
-app.use('/users', userRouter)
-app.use('/register', registerRouter)
-app.use('/login', loginRouter)
-app.use('/logout', logoutRouter)
 
 // mongo db connect
 const mongoose = require('mongoose')

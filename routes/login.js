@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
     if (!req.session.user_id) {
         return res.render('login', { session: false })
     }
-    return res.render('login', { session: true })
+    return res.render('index', { session: true })
 })
 
 router.post('/', async (req, res) => {
@@ -19,13 +19,19 @@ router.post('/', async (req, res) => {
         return res.status(400).send('please input password')
     }
 
-    const foundUser = await User.authValid(email, password)
+    try {
+        const foundUser = await User.authValid(email, password)
     
-    if(foundUser) {
-        req.session.user_id = foundUser._id
-        res.redirect('/')
-    } else {
-        res.redirect('/login')
+        if(foundUser) {
+            req.session.user_id = foundUser._id
+            // req.session.user = foundUser
+            return res.redirect('/')
+        } else {
+            return res.redirect('/login')
+        }
+    } catch(err) {
+        console.log(err)
+        return res.redirect('/')
     }
    
 })

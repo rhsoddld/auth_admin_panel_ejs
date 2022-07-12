@@ -1,16 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
+const authCheck = require('../middlewares/auth')
 
-const requireLogin = (req, res, next) => {
-    if (!req.session.user_id) {
-        return res.redirect('/login')
-    }
-    next();
-}
-
-router.get('/', requireLogin, async (req, res) => {
-// router.get('/', async (req, res) => {
+router.get('/', authCheck, async (req, res) => {    
     let query = User.find()
 
     try {
@@ -21,7 +14,7 @@ router.get('/', requireLogin, async (req, res) => {
     }
 })
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit', authCheck, async (req, res) => {
     try{
         const user = await User.findById(req.params.id)
         return res.render(`users/edit`, { results: user, session: true})
@@ -30,7 +23,7 @@ router.get('/:id/edit', async (req, res) => {
     }
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authCheck, async (req, res) => {
     let user
     try {
         user = await User.findById(req.params.id)
@@ -41,7 +34,7 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authCheck, async (req, res) => {
     let user
     try {
         

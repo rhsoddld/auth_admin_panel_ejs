@@ -1,12 +1,16 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => {
-    if (!req.session.user_id) {
-        return res.render('index', { session: false })
-    }
-    return res.render('index', { session: true })
+const mainRouter = require('./main')
+const userRouter = require('./users')
+const registerRouter = require('./registers')
+const loginRouter = require('./login')
+const logoutRouter = require('./logout')
 
-})
+router.use("/", mainRouter)
+router.use("/users", userRouter)
+router.use("/register", registerRouter)
+router.use("/login", loginRouter)
+router.use("/logout", logoutRouter)
 
 module.exports = router
